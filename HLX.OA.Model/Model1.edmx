@@ -21,7 +21,7 @@
           <Property Name="ActionInfoName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Sort" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ActionTypeEnum" Type="smallint" Nullable="false" />
-          <Property Name="Menylcon" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenuIcon" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IconWidth" Type="int" Nullable="false" />
           <Property Name="IconHeight" Type="int" Nullable="false" />
         </EntityType>
@@ -293,7 +293,7 @@
           <Property Name="ActionInfoName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Sort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ActionTypeEnum" Type="Int16" Nullable="false" />
-          <Property Name="Menylcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MenuIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IconWidth" Type="Int32" Nullable="false" />
           <Property Name="IconHeight" Type="Int32" Nullable="false" />
           <NavigationProperty Name="R_UserInfo_ActionInfo" Relationship="Self.FK_R_UserInfo_ActionInfo_ActionInfo1" FromRole="ActionInfo" ToRole="R_UserInfo_ActionInfo" />
@@ -446,7 +446,7 @@
                 <ScalarProperty Name="ActionInfoName" ColumnName="ActionInfoName" />
                 <ScalarProperty Name="Sort" ColumnName="Sort" />
                 <ScalarProperty Name="ActionTypeEnum" ColumnName="ActionTypeEnum" />
-                <ScalarProperty Name="Menylcon" ColumnName="Menylcon" />
+                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
                 <ScalarProperty Name="IconWidth" ColumnName="IconWidth" />
                 <ScalarProperty Name="IconHeight" ColumnName="IconHeight" />
               </MappingFragment>
