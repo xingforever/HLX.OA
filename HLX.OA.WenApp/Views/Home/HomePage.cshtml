@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+}
+
+<h2>HomePage</h2>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomePage</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            bindClickEvent();
+        });
+        function bindClickEvent() {
+            $(".detailLink").click(function () {
+                var title = $(this).text();
+                var url = $(this).attr("url");
+                var isExt = $('#tt').tabs('exists', title);
+                if (isExt) {
+                    $('#tt').tabs('select', title);
+                    return;
+                }
+                $('#tt').tabs('add', {
+                    title: title,
+                    content: showContent(url),
+                    closable: true
+                });
+
+            });
+        }
+        function showContent(url) {
+            var str = '<iframe src="'+url+'" width="100%" height="100%" frameborder="0"></iframe>';
+            return str
+        }
+    </script>
+    <style type="text/css">
+        .txt {
+            font-size: 20px;
+            font-weight: bold;
+            color: blue;
+            margin-top: 10px;
+            margin-left: 100px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body class="easyui-layout">
+    <div data-options="region:'north',border:false" style="height:85px;background:#B3DFDA;padding:10px;overflow:hidden;background-image:url('/Content/Images/bg3.png')"> @*去掉滚动条*@
+        <img src="/Content/Images/logo.gif" style="float:left" />
+        <span class="txt">HLX-OA办公系统</span>
+
+    </div>
+    <div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:3px;">
+
+        <div class="easyui-accordion" style="width:auto;height:auto;">
+            <div title="用户管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:5px;">
+                <a href="javascript:void(0)" class="detailLink" url="/UserInfo/Index">用户管理</a>
+            </div>
+            <div title="角色管理" data-options="iconCls:'icon-help'" style="padding:5px;">
+                <a href="javascript:void(0)" class="detailLink" url="/RoleInfo/Index">角色管理</a>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">south region</div>
+    <div data-options="region:'center',title:'Center'">
+        @*fit 铺满屏幕*@
+        <div class="easyui-tabs" style="width:700px;height:250px" fit="true" id="tt">
+            <div title="用户管理" style="padding:10px">
+                <iframe src="/UserInfo/Index" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+</body>
+
+</html>

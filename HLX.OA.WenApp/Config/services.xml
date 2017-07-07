@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects>
+  <object type="HLX.OA.BLL.UserInfoService,HLX.OA.BLL" singleton="false" name="UserInfoService" >
+  </object>
+  <object type="HLX.OA.BLL.RoleInfoService,HLX.OA.BLL" singleton="false" name="RoleInfoService" >
+  </object>
+  <object type="HLX.OA.BLL.ActionInfoService,HLX.OA.BLL" singleton="false" name="ActionInfoService" >
+  </object>
+  <object type="HLX.OA.BLL.R_UserInfo_ActionInfoService, HLX.OA.BLL" singleton="false" name="R_UserInfo_ActionInfoService" >
+  </object>
+</objects>
