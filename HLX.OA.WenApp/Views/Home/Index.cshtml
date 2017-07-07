@@ -168,18 +168,18 @@
         return win;
     }
     var links = [
-        {icon: '/Content/lib/images/3DSMAX.png', title: '用户管理', url: '/Userinfo/index' },
-        {icon: '/Content/lib/images/3DSMAX.png', title: '角色管理', url: '/RoleInfo/Index' },
-        {icon: '/Content/lib/images/3DSMAX.png', title: '多表头', url: '../grid/mulheader/grid2.htm' },
-        {icon: '/Content/lib/images/Program Files Folder.png', title: '固定列', url: '../grid/frozen/frozengrid.htm' },
-        {icon: '/Content/lib/images/Program Files Folder.png', title: '可拖动', url: '../base/drag.htm' },
-        {icon: '/Content/lib/images/Alien Folder.png', title: '树', url: '../tree/draggable.htm' },
-        {icon: '/Content/lib/images/Xp-G5 006.png', title: '下拉框', url: '../comboBox/comboBoxGrid.htm' },
-        {icon: '/Content/lib/images/Xp-G5 006.png', title: '下拉框', url: '../comboBox/comboBoxGrid.htm' },
-        {icon: '/Content/lib/images/Alien Folder.png', title: 'layout', url: '../layout/layoutFullHeight.htm' },
-        {icon: '/Content/lib/images/Alien Folder.png', title: 'menu', url: '../menu/menubar.htm' },
-        {icon: '/Content/lib/images/Xp-G5 006.png', title: 'tab', url: '../tab/tabHtml.htm' },
-        {icon: '/Content/lib/images/3DSMAX.png', title: '分组', url: '../grid/groupable/checkbox.htm' }
+        //{icon: '/Content/lib/images/3DSMAX.png', title: '用户管理', url: '/Userinfo/index' },
+        //{icon: '/Content/lib/images/3DSMAX.png', title: '角色管理', url: '/RoleInfo/Index' },
+        //{icon: '/Content/lib/images/3DSMAX.png', title: '多表头', url: '../grid/mulheader/grid2.htm' },
+        //{icon: '/Content/lib/images/Program Files Folder.png', title: '固定列', url: '../grid/frozen/frozengrid.htm' },
+        //{icon: '/Content/lib/images/Program Files Folder.png', title: '可拖动', url: '../base/drag.htm' },
+        //{icon: '/Content/lib/images/Alien Folder.png', title: '树', url: '../tree/draggable.htm' },
+        //{icon: '/Content/lib/images/Xp-G5 006.png', title: '下拉框', url: '../comboBox/comboBoxGrid.htm' },
+        //{icon: '/Content/lib/images/Xp-G5 006.png', title: '下拉框', url: '../comboBox/comboBoxGrid.htm' },
+        //{icon: '/Content/lib/images/Alien Folder.png', title: 'layout', url: '../layout/layoutFullHeight.htm' },
+        //{icon: '/Content/lib/images/Alien Folder.png', title: 'menu', url: '../menu/menubar.htm' },
+        //{icon: '/Content/lib/images/Xp-G5 006.png', title: 'tab', url: '../tab/tabHtml.htm' },
+        //{icon: '/Content/lib/images/3DSMAX.png', title: '分组', url: '../grid/groupable/checkbox.htm' }
     ];
 
     function onResize() {
@@ -221,10 +221,13 @@
 
     $(window).resize(onResize);
     $.ligerui.win.removeTaskbar = function () {}; //不允许移除
-    $.ligerui.win.createTaskbar(); //页面加载时创建任务栏
-
-    linksInit();
-    onResize();
+                 $.ligerui.win.createTaskbar(); //页面加载时创建任务栏
+                 $.getJSON("/Home/Getmenus", {}, function (data) {
+                     links = data;
+                     linksInit();
+                     onResize();
+                 });
+   
 
     </script>
 

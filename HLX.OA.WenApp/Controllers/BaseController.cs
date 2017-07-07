@@ -19,11 +19,14 @@ namespace HLX.OA.WenApp.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            if (Session["userInfo"] ==null )
-            {
-                //  filterContext.HttpContext.Response.Redirect("/Login/Index");
+            if (Session["userInfo"] == null) { 
+           //  filterContext.HttpContext.Response.Redirect("/Login/Index");
                 filterContext.Result = Redirect("/Login/Index");
             }
+             else
+            {  
+             LoginUser =(UserInfo) Session["userInfo"];
+             }
         }
     }
 }
