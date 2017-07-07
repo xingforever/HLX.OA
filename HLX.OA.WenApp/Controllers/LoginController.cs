@@ -36,7 +36,6 @@ namespace HLX.OA.WenApp.Controllers
             if (userinfo!=null)
             {
                 Session["userInfo"] = userinfo;
-
                 return Content("ok:登录成功");
             }
             else

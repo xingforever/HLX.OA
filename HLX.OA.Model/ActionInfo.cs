@@ -34,7 +34,7 @@ namespace HLX.OA.Model
         public string ActionInfoName { get; set; }
         public string Sort { get; set; }
         public short ActionTypeEnum { get; set; }
-        public string MenuIcon { get; set; }
+        public string Menylcon { get; set; }
         public int IconWidth { get; set; }
         public int IconHeight { get; set; }
     
