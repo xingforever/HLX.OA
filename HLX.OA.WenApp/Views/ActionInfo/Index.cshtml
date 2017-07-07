@@ -1,0 +1,227 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>权限管理</title>
+   
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/datapattern.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
+    <script type="text/javascript">
+        $(function () {
+          $("#addDiv").css("display", "none");
+          loadData();
+            //为权限类别下拉框绑定change事件
+          $("#actionTypeEnumChange").change(function () {
+              if ($(this).val() == "1") {
+                  $("#showTr").fadeIn();
+              } else {
+                  $("#showTr").fadeOut();
+              }
+          });
+            //为上传按钮绑定单击事件。
+          $("#btnFileUp").click(function () {
+              $("#addForm").ajaxSubmit({
+                  success: function (str) {
+                      var data = str.split(':');
+                      if (data[0] == "ok") {
+                          var img = "<img src='" + data[1] + "' width='30' height='30'/>";
+
+                          $("#showImage").append(img);
+                          $("#hiddenMenuIcon").val(data[1]);//将上传成功的图片路径存储到隐藏域中。
+                      } else {
+                          alert(data[1]);
+                      }
+                  },
+                  url: '/ActionInfo/GetFileUp',
+                  type: "post",
+                  dataType: "text"
+              });
+          });
+
+        });
+        function loadData(pars) {
+            $('#tt').datagrid({
+                url: '/ActionInfo/GetActionInfoList',
+                title: '权限数据表格',
+                width: 700,
+                height: 400,
+                fitColumns: true, //列自适应
+                nowrap: false,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载权限的信息...',
+                pagination: true,//是否有分页
+                singleSelect: false,//是否单行选择
+                pageSize: 5,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [5, 10, 15],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+					{ field: 'ID', title: '编号', width: 80 },
+					{ field: 'ActionInfoName', title: '权限名称', width: 120 },
+                     { field: 'Sort', title: '排序', width: 120 },
+                      { field: 'Remark', title: '备注', width: 120 },
+                       { field: 'Url', title: 'Url', width: 120 },
+                        { field: 'HttpMethod', title: '请求方式', width: 120 },
+                        {
+                            field: 'ActionTypeEnum', title: '权限类别', width: 120,
+                            formatter: function (value, row, index) {
+                                if (value == "1") {
+                                    return "菜单权限";
+                                } else {
+                                    return "普通权限";
+                                }
+
+                            }
+
+                        },
+
+                    	{
+                    	    field: 'SubTime', title: '操作', width: 80, align: 'right',
+                    	    formatter: function (value, row, index) {
+                    	        return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-M-d");
+                    	    }
+                    	},
+                        {
+                            field: 'Operator', title: '时间', width: 80, align: 'right',
+                            formatter: function (value, row, index) {
+                                var str = "<a href='javascript:void(0)' class='deletes' nId='"+row.ID+"'>删除</a>";
+                                return str;
+                            }
+                        }
+                ]],
+                toolbar: [{
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+
+                        deleteInfo();
+                    }
+                }, {
+                    id: 'btnAdd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+
+                        addInfo();
+                    }
+                }, {
+                    id: 'btnEidt',
+                    text: '编辑',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+
+                        showEditInfo();
+                    }
+                }],
+                onLoadSuccess: function () {
+                    $(".deletes").click(function () {
+                        alert($(this).attr("nId"));
+                    });
+                }
+
+            });
+        }
+
+        function addInfo() {
+            $("#addDiv").css("display", "block");
+            $('#addDiv').dialog({
+                title: '添加权限数据',
+                width: 300,
+                height: 400,
+                collapsible: true,
+                maximizable: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: 'Ok',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        //提交表单
+                        //调用子窗口的方法.
+                        //var childWindow = $("#addFrame")[0].contentWindow;//表示获取了嵌入在iframe中的子窗体的window对象。
+                        //childWindow.subForm();//调用子窗体中的方法，完成表单的提交。
+                        $("#addForm").submit();
+                    }
+                }, {
+                    text: 'Cancel',
+                    handler: function () {
+                        $('#addDiv').dialog('close');
+                    }
+                }]
+            });
+        }
+        //添加完成后调用该方法。
+        function afterAdd(data) {
+            if (data == "ok") {
+                $('#addDiv').dialog('close');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <table id="tt" style="width: 700px;" title="标题，可以使用代码进行初始化，也可以使用这种属性的方式" iconcls="icon-edit"></table>
+    </div>
+
+    <!--------------添加数据---------------------->
+    <div id="addDiv">
+        @using (Ajax.BeginForm("AddActionInfo", "ActionInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAdd" }, new { id = "addForm" }))
+        {
+            <table>
+                <tr><td>权限名称</td><td><input type="text" name="ActionInfoName" /></td></tr>
+                <tr><td>Url</td><td><input type="text" name="Url" /></td></tr>
+
+                <tr>
+                    <td>HttpMethod</td>
+                    <td>
+                        <select name="HttpMethod">
+                            <option value="POST">Post</option>
+                            <option value="GET">Get</option>
+                        </select>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>权限类别</td>
+                    <td>
+                        <select name="ActionTypeEnum" id="actionTypeEnumChange">
+                            <option value="0">普通权限</option>
+                            <option value="1">菜单权限</option>
+                        </select>
+
+                    </td>
+                </tr>
+                <tr id="showTr" style="display:none">
+                    <td>上传图标</td>
+                    <td>
+                        <input type="file" name="fileUp" />
+                        <input type="button" value="上传图片" id="btnFileUp" />
+                        <div id="showImage"></div>
+                        <input type="hidden" name="MenuIcon" id="hiddenMenuIcon" />
+                    </td>
+                </tr>
+
+                <tr><td>备注</td><td><input type="text" name="Remark" /></td></tr>
+                <tr><td>排序</td><td><input type="text" name="Sort" /></td></tr>
+            </table>
+        }
+    </div>
+
+
+</body>
+</html>

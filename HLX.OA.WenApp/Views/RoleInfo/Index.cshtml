@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+   <title>角色管理</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+    <script src="~/Scripts/jquery-1.7.1.js"></script>
+    @*<script src="~/Scripts/jquery-3.1.1.js"></script>*@
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/datapattern.js"></script>@*//格式转换 JSon数据转换*@
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#AddDiv').css('display', 'none');
+            loadData();
+        });
+
+        function AfterAdd() {
+
+
+        }
+
+        
+        function loadData(pars) {
+            $('#tt').datagrid({
+                url: '/RoleInfo/GetRoleInfoList',
+                title: '角色数据表格',
+                width: 700,
+                height: 400,
+                fitColumns: true, //列自适应
+                nowrap: false,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载角色的信息...',
+                pagination: true,//是否有分页
+                singleSelect: false,//是否单行选择
+                pageSize: 5,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [5, 10, 15],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '编号', width: 80 },
+                    { field: 'RoleName', title: '角色名称', width: 120 },
+                    { field: 'Sort', title: '排序', width: 120 },
+                    { field: 'Remark', title: '备注', width: 120 },
+                    {
+                        field: 'SubTime', title: '时间', width: 80, align: 'right',
+                        formatter: function (value, row, index) {
+                            return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-M-d");
+                        }
+                    }
+                ]],
+                toolbar: [{
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+
+                        deleteInfo();
+                    }
+                }, {
+                    id: 'btnAdd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+
+                        addInfo();
+                    }
+                }, {
+                    id: 'btnEidt',
+                    text: '编辑',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+
+                        showEditInfo();
+                    }
+                }],
+            });
+        }
+
+
+
+
+        //添加数据
+        function addInfo() {
+            //嵌入iframe 制定页面URL地址
+            $('#addFrame').attr("src", "/RoleInfo/ShowRoleInfo");
+            $("#addDiv").css("display", "block");
+            $('#addDiv').dialog({
+                title: '添加角色数据',
+                width: 400,
+                height: 500,
+                collapsible: true,
+                maximizable: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: 'Ok',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        //提交表单 调用子窗口的方法
+                        var Childwindow = $("#addFrame")[0].contentWindow;//表示获取嵌入在Iframe 的子窗体的window的对象
+                        Childwindow.SubForm();//调用 子窗体方法
+                    }
+                }, {
+                    text: 'Cancel',
+                    handler: function () {
+                        $('#addDiv').dialog('close');
+                    }
+                }]
+            });
+
+        }
+        //添加完成后 调用该方法
+        function afterAdd(data) {
+            if (data == "OK") {
+                $("#addDiv").dialog('close');
+                $("#tt").datagrid('reload');//加载表格不会跳到第一页
+        
+            }
+
+        }
+    </script>
+
+
+
+</head>
+<body>
+    <div>
+        <table id="tt" style="width:  700px;" title="标题，可以用代码进行初始化" iconcls="icon-edit"></table>
+
+    </div>
+
+
+    @*添加数据表单*@
+    <div id="addDiv">
+        @*iframe 不利于SEO*@
+        <iframe id="addFrame" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+        @*@using (Ajax.BeginForm("AddUserInfo", "UserInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAdd" }, new { id = "addForm" }))
+    {
+        <table>
+            <tr><td>用户名</td><td><input type="text" name="UName" /></td></tr>
+            <tr><td>密码</td><td><input type="password" name="UPwd" /></td></tr>
+            <tr><td>备注</td><td><input type="text" name="Remark" /></td></tr>
+            <tr><td>排序</td><td><input type="text" name="Sort" /></td></tr>
+        </table>
+    }*@
+   
+</body>
+</html>
+
