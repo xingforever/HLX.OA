@@ -15,6 +15,11 @@ namespace HLX.OA.IDAL
       
     }
 	
+	public partial interface IBooksDal :IBaseDal<Books>
+    {
+      
+    }
+	
 	public partial interface IDepartmentDal :IBaseDal<Department>
     {
       

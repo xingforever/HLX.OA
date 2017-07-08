@@ -6,6 +6,7 @@
     <property name="RoleInfoService" ref="RoleInfoService" />
     <property name="ActionInfoService" ref="ActionInfoService" />
     <property name="R_UserInfo_ActionInfoService" ref="R_UserInfo_ActionInfoService" />
+  
   </object>
   <object  type="HLX.OA.WenApp.Controllers.LoginController,HLX.OA.WenApp" singleton="false" >
     <property name="UserInfoService" ref="UserInfoService" />
@@ -20,6 +21,10 @@
   <object  type="HLX.OA.WenApp.Controllers.HomeController, HLX.OA.WenApp" singleton="false" >
     <property name="UserInfoService" ref="UserInfoService" />
   </object>
+    <object  type="HLX.OA.WenApp.Controllers.SearchController, HLX.OA.WenApp" singleton="false" >
+      <property name="BooksService" ref="BooksService" />
+  </object>
+
   <!--<object  type="HLX.OA.WenApp.Controllers.LoginController, HLX.OA.WenApp" singleton="false" >
     <property name="UserInfoService" ref="UserInfoService" />
   </object>-->

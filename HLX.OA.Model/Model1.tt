@@ -23,6 +23,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
     fileManager.StartNewFile(entity.Name + ".cs");
     BeginNamespace(code);
 #>
+using Newtonsoft.Json;
 <#=codeStringGenerator.UsingDirectives(inHeader: false)#>
 <#=codeStringGenerator.EntityClassOpening(entity)#>
 {
@@ -99,6 +100,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
             if (navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
             {
 #>
+[JsonIgnore]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 <#
             }

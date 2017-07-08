@@ -16,6 +16,11 @@ namespace HLX.OA.IBLL
        
     }   
 	
+	public partial interface IBooksService : IBaseService<Books>
+    {
+       
+    }   
+	
 	public partial interface IDepartmentService : IBaseService<Department>
     {
        

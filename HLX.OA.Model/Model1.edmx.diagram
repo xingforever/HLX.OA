@@ -16,6 +16,7 @@
         <AssociationConnector Association="OAModel.RoleInfoActionInfo" />
         <AssociationConnector Association="OAModel.UserInfoDepartment" />
         <AssociationConnector Association="OAModel.UserInfoRoleInfo" />
+        <EntityTypeShape EntityType="OAModel.Books" Width="1.5" PointX="6.125" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

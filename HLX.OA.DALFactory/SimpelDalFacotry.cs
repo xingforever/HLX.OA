@@ -24,6 +24,14 @@ namespace HLX.OA.DALFactory
 
         }
 		
+	    public static IBooksDal CreateBooksDal()
+        {
+
+		 string fullClassName = NameSpace + ".BooksDal";
+          return CreateInstance(fullClassName) as IBooksDal;
+
+        }
+		
 	    public static IDepartmentDal CreateDepartmentDal()
         {
 

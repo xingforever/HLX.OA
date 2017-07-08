@@ -9,9 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace HLX.OA.DALFactory
 {
-	public partial class DbSession : IDBSession
+    public partial class DbSession : IDBSession
     {
 	
 		private IActionInfoDal _ActionInfoDal;
@@ -26,6 +27,20 @@ namespace HLX.OA.DALFactory
                 return _ActionInfoDal;
             }
             set { _ActionInfoDal = value; }
+        }
+	
+		private IBooksDal _BooksDal;
+        public IBooksDal BooksDal
+        {
+            get
+            {
+                if(_BooksDal == null)
+                {
+                    _BooksDal = AbstractFactory.CreateBooksDal();
+                }
+                return _BooksDal;
+            }
+            set { _BooksDal = value; }
         }
 	
 		private IDepartmentDal _DepartmentDal;
@@ -83,9 +98,5 @@ namespace HLX.OA.DALFactory
             }
             set { _UserInfoDal = value; }
         }
-
-      //  public DbContext Db => throw new NotImplementedException();
-
-       
-    }	
+	}	
 }

@@ -16,6 +16,11 @@ namespace HLX.OA.DAL
 
     }
 		
+	public partial class BooksDal :BaseDal<Books>,IBooksDal
+    {
+
+    }
+		
 	public partial class DepartmentDal :BaseDal<Department>,IDepartmentDal
     {
 

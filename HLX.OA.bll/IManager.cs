@@ -20,6 +20,16 @@ namespace HLX.OA.BLL
         }
     }   
 	
+	public partial class BooksService :BaseService<Books>,IBooksService
+    {
+    
+
+		 public override void SetCurrentDal()
+        {
+            CurrentDal = this.CurrentDBSession.BooksDal;
+        }
+    }   
+	
 	public partial class DepartmentService :BaseService<Department>,IDepartmentService
     {
     

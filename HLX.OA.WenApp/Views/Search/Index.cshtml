@@ -1,0 +1,35 @@
+﻿
+@{
+//ViewBag.Title = "Index";
+}
+@using HLX.OA.WenApp.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>搜索</title>
+</head>
+<body>
+    <div>
+        <form method="post" action="/Search/SearchContent">
+            <input type="text" name="txtSearch" />
+            <input type="submit" value="搜一搜 " name="btnSearch" />
+            <input type="submit"value="创建索引库" name="btnCreate"/>
+        </form>
+        <br />
+        <ul>
+            @if (ViewData["list"] != null)
+            {
+               foreach(var vieModel in (List<ViewModelContent>)ViewData["list"])
+            {
+                <li> @vieModel.Title</li>
+                <li>@vieModel.Content</li>
+            }
+            }
+        </ul>
+
+    </div>
+</body>
+</html>
+
+
