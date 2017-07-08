@@ -8,26 +8,85 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>搜索</title>
+    <style type="text/css">
+        .search-text2 {
+            display: block;
+            width: 528px;
+            height: 26px;
+            line-height: 26px;
+            float: left;
+            margin: 3px 5px;
+            border: 1px solid gray;
+            outline: none;
+            font-family: 'Microsoft Yahei';
+            font-size: 14px;
+        }
+
+        .search-btn2 {
+            width: 102px;
+            height: 32px;
+            line-height: 32px;
+            cursor: pointer;
+            border: 0px;
+            background-color: #d6000f;
+            font-family: 'Microsoft Yahei';
+            font-size: 16px;
+            color: #f3f3f3;
+        }
+
+        .search-list-con {
+            width: 640px;
+            background-color: #fff;
+            overflow: hidden;
+            margin-top: 0px;
+            padding-bottom: 15px;
+            padding-top: 5px;
+        }
+
+        .search-list {
+            width: 600px;
+            overflow: hidden;
+            margin: 15px 20px 0px 20px;
+        }
+
+         .search-list dt {
+                font-family: 'Microsoft Yahei';
+                font-size: 16px;
+                line-height: 20px;
+                margin-bottom: 7px;
+                font-weight: normal;
+            }
+
+         .search-list dt a {
+                    color: #2981a9;
+                }
+
+         .search-list dt a em {
+                        font-style: normal;
+                        color: #cc0000;
+                    }
+    </style>
 </head>
 <body>
     <div>
-        <form method="post" action="/Search/SearchContent">
-            <input type="text" name="txtSearch" />
-            <input type="submit" value="搜一搜 " name="btnSearch" />
-            <input type="submit"value="创建索引库" name="btnCreate"/>
+        <form method="get" action="/Search/SearchContent">
+            <input type="text" name="txtSearch" class="search-text2"/>
+            <input type="submit" value="搜一搜 " name="btnSearch" class="search-btn2"/>
+            @*<input type="submit"value="创建索引库" name="btnCreate"/>*@
         </form>
         <br />
-        <ul>
-            @if (ViewData["list"] != null)
-            {
-               foreach(var vieModel in (List<ViewModelContent>)ViewData["list"])
-            {
-                <li> @vieModel.Title</li>
-                <li>@vieModel.Content</li>
-            }
-            }
-        </ul>
-
+        <div class="search-list-con">
+            <dl class="search-list">
+                @if (ViewData["list"] != null)
+                {
+                    foreach (var vieModel in (List<ViewModelContent>)ViewData["list"])
+                    {
+                        <dt><a href="javascript:void(0)"> @vieModel.Title</a></dt>
+                        <dd>@MvcHtmlString.Create(vieModel.Content)</dd>
+                    }
+                }
+            </dl>
+        </div>
     </div>
 </body>
 </html>
