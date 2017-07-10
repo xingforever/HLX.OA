@@ -19,6 +19,8 @@ namespace HLX.OA.WenApp
         protected void Application_Start()
         {
             log4net.Config.XmlConfigurator.Configure();//读取了配置文件中关于Log4Net配置信息.
+            IndexManager.GetInstance().StartThread();//开启 线程 扫描队列
+            //扫描的是 luceneNet  
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

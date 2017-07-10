@@ -115,15 +115,16 @@ namespace HLX.OA.WenApp.Controllers
             //    document.Add(new Field("Title", bookModel.Title.ToString(), Field.Store.YES, Field.Index.ANALYZED, Lucene.Net.Documents.Field.TermVector.WITH_POSITIONS_OFFSETS));
 
             //    document.Add(new Field("Content", bookModel.ContentDescription.ToString(), Field.Store.YES, Field.Index.ANALYZED, Lucene.Net.Documents.Field.TermVector.WITH_POSITIONS_OFFSETS));
-            
+
             //    writer.AddDocument(document);
-            }
-            
-           
-            writer.Close();//会自动解锁。
-            directory.Close();//不要忘了Close，否则索引结果搜不到
-
-
+            //writer.Close();//会自动解锁。
+            //directory.Close();//不要忘了Close，否则索引结果搜不到
         }
+
+
+
+
+
+
     }
 }
