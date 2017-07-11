@@ -40,6 +40,14 @@ namespace HLX.OA.DALFactory
 
         }
 		
+	    public static IKeyWordsRankDal CreateKeyWordsRankDal()
+        {
+
+		 string fullClassName = NameSpace + ".KeyWordsRankDal";
+          return CreateInstance(fullClassName) as IKeyWordsRankDal;
+
+        }
+		
 	    public static IR_UserInfo_ActionInfoDal CreateR_UserInfo_ActionInfoDal()
         {
 
@@ -53,6 +61,14 @@ namespace HLX.OA.DALFactory
 
 		 string fullClassName = NameSpace + ".RoleInfoDal";
           return CreateInstance(fullClassName) as IRoleInfoDal;
+
+        }
+		
+	    public static ISearchDetialsDal CreateSearchDetialsDal()
+        {
+
+		 string fullClassName = NameSpace + ".SearchDetialsDal";
+          return CreateInstance(fullClassName) as ISearchDetialsDal;
 
         }
 		

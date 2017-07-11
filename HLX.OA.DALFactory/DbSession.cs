@@ -7,6 +7,7 @@ using HLX.OA.IDAL;
 using HLX.OA.Model;
 using HLX.OA.DAL;
 using System.Data.Entity;
+using System.Data.SqlClient;
 
 namespace HLX.OA.DALFactory
 {
@@ -34,10 +35,7 @@ namespace HLX.OA.DALFactory
         //        _UserInfoDal = value;
         //    }
         //}
-
-     
-
-
+        
 
         /// <summary>
         /// 一个业务中经常涉及到对多张表操作，我们希望连接一次表，完成对表数据的操作
@@ -47,6 +45,18 @@ namespace HLX.OA.DALFactory
         {
             return Db.SaveChanges() > 0;
 
+        }
+
+        public int ExecuteSql(string sql, params SqlParameter[] pars)
+        {
+            return Db.Database.ExecuteSqlCommand(sql, pars);
+           
+
+        }
+
+        public List<T> ExecuteQuery<T>(string sql, params SqlParameter[] pars)
+        {
+            return Db.Database.SqlQuery<T>(sql, pars).ToList();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,5 +16,7 @@ namespace HLX.OA.IDAL
          DbContext Db { get;  }
         // IUserInfoDal UserInfoDal { get; set; }
          bool SaveChanges();
+        int ExecuteSql(string sql, params SqlParameter[] pars);
+        List<T> ExecuteQuery<T>(string sql, params SqlParameter[] pars);
     }
 }

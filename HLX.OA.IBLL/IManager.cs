@@ -26,12 +26,22 @@ namespace HLX.OA.IBLL
        
     }   
 	
+	public partial interface IKeyWordsRankService : IBaseService<KeyWordsRank>
+    {
+       
+    }   
+	
 	public partial interface IR_UserInfo_ActionInfoService : IBaseService<R_UserInfo_ActionInfo>
     {
        
     }   
 	
 	public partial interface IRoleInfoService : IBaseService<RoleInfo>
+    {
+       
+    }   
+	
+	public partial interface ISearchDetialsService : IBaseService<SearchDetials>
     {
        
     }   

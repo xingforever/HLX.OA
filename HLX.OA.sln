@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLX.OA.Model", "HLX.OA.Model\HLX.OA.Model.csproj", "{0EB43F15-DAE7-47C4-8587-6D7D26D58678}"
 EndProject
@@ -34,6 +34,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LuceneNetDemo", "LuceneNetDemo", "{49226FC6-C1CF-4B20-80FB-87EB1CAC1F8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuceneNetDemo", "LuceneNetDemo\LuceneNetDemo.csproj", "{BB067CF9-3E5A-4DCA-A84C-C3DB6781CE9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLX.OA.QuartzNet", "HLX.OA.QuartzNet\HLX.OA.QuartzNet.csproj", "{4C934695-2611-4242-9C52-2DF3F644B8EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{BB067CF9-3E5A-4DCA-A84C-C3DB6781CE9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB067CF9-3E5A-4DCA-A84C-C3DB6781CE9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB067CF9-3E5A-4DCA-A84C-C3DB6781CE9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C934695-2611-4242-9C52-2DF3F644B8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C934695-2611-4242-9C52-2DF3F644B8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C934695-2611-4242-9C52-2DF3F644B8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C934695-2611-4242-9C52-2DF3F644B8EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

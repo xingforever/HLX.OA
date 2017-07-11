@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace HLX.OA.DALFactory
 {
     public partial class DbSession : IDBSession
@@ -57,6 +56,20 @@ namespace HLX.OA.DALFactory
             set { _DepartmentDal = value; }
         }
 	
+		private IKeyWordsRankDal _KeyWordsRankDal;
+        public IKeyWordsRankDal KeyWordsRankDal
+        {
+            get
+            {
+                if(_KeyWordsRankDal == null)
+                {
+                    _KeyWordsRankDal = AbstractFactory.CreateKeyWordsRankDal();
+                }
+                return _KeyWordsRankDal;
+            }
+            set { _KeyWordsRankDal = value; }
+        }
+	
 		private IR_UserInfo_ActionInfoDal _R_UserInfo_ActionInfoDal;
         public IR_UserInfo_ActionInfoDal R_UserInfo_ActionInfoDal
         {
@@ -83,6 +96,20 @@ namespace HLX.OA.DALFactory
                 return _RoleInfoDal;
             }
             set { _RoleInfoDal = value; }
+        }
+	
+		private ISearchDetialsDal _SearchDetialsDal;
+        public ISearchDetialsDal SearchDetialsDal
+        {
+            get
+            {
+                if(_SearchDetialsDal == null)
+                {
+                    _SearchDetialsDal = AbstractFactory.CreateSearchDetialsDal();
+                }
+                return _SearchDetialsDal;
+            }
+            set { _SearchDetialsDal = value; }
         }
 	
 		private IUserInfoDal _UserInfoDal;

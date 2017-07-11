@@ -13,14 +13,10 @@ namespace HLX.OA.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class R_UserInfo_ActionInfo
+    public partial class SearchDetials
     {
-        public int ID { get; set; }
-        public int UserInfoID { get; set; }
-        public int ActionInfoID { get; set; }
-        public bool IsPass { get; set; }
-    
-        public virtual UserInfo UserInfo { get; set; }
-        public virtual ActionInfo ActionInfo { get; set; }
+        public System.Guid Id { get; set; }
+        public string KeyWords { get; set; }
+        public System.DateTime SearchDateTime { get; set; }
     }
 }

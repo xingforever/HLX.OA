@@ -7,8 +7,8 @@
     <ProjectGuid>{39FEE896-595A-448B-8F0B-564D7C9EDA77}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HLX.OA.Bll</RootNamespace>
-    <AssemblyName>HLX.OA.Bll</AssemblyName>
+    <RootNamespace>HLX.OA.BLL</RootNamespace>
+    <AssemblyName>HLX.OA.BLL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,6 +46,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="KeyWordsRankService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInfoService.cs" />
   </ItemGroup>

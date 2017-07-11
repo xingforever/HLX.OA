@@ -19,9 +19,13 @@ namespace HLX.OA.IDAL
 	
 		IDepartmentDal DepartmentDal{get;set;}
 	
+		IKeyWordsRankDal KeyWordsRankDal{get;set;}
+	
 		IR_UserInfo_ActionInfoDal R_UserInfo_ActionInfoDal{get;set;}
 	
 		IRoleInfoDal RoleInfoDal{get;set;}
+	
+		ISearchDetialsDal SearchDetialsDal{get;set;}
 	
 		IUserInfoDal UserInfoDal{get;set;}
 	}	

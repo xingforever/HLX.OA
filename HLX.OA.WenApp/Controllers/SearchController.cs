@@ -17,6 +17,7 @@ namespace HLX.OA.WenApp.Controllers
     public class SearchController : Controller
     {
         IBLL.IBooksService BooksService { get; set; }
+        IBLL.ISearchDetialsService SearchDetialsService { get; set; }
 
         // GET: Search
         public ActionResult Index()
@@ -79,6 +80,12 @@ namespace HLX.OA.WenApp.Controllers
                 viewModel.Content = Common.WebCommon.CreateHightLight( Request["txtSearch"],doc.Get("Content"));//高亮显示 搜索内容
                 vieModelList.Add(viewModel);
             }
+            Model.SearchDetials searchDetail = new SearchDetials();
+            searchDetail.Id = Guid.NewGuid();
+            searchDetail.KeyWords = Request["txtSearch"];
+            searchDetail.SearchDateTime = DateTime.Now;
+            SearchDetialsService.AddEntity(searchDetail);
+
 
 
             return vieModelList;

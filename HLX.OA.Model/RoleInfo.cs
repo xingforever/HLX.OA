@@ -18,8 +18,8 @@ namespace HLX.OA.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RoleInfo()
         {
-            this.ActionInfo = new HashSet<ActionInfo>();
             this.UserInfo = new HashSet<UserInfo>();
+            this.ActionInfo = new HashSet<ActionInfo>();
         }
     
         public int ID { get; set; }
@@ -32,9 +32,9 @@ namespace HLX.OA.Model
     
     [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ActionInfo> ActionInfo { get; set; }
+        public virtual ICollection<UserInfo> UserInfo { get; set; }
     [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInfo> UserInfo { get; set; }
+        public virtual ICollection<ActionInfo> ActionInfo { get; set; }
     }
 }

@@ -63,6 +63,14 @@
           <Property Name="Level" Type="int" Nullable="false" />
           <Property Name="IsLeaf" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="KeyWordsRank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KeyWords" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SearchCount" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="R_UserInfo_ActionInfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -91,6 +99,14 @@
           </Key>
           <Property Name="RoleIinfo_ID" Type="int" Nullable="false" />
           <Property Name="ActionInfo_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SearchDetials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KeyWords" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SearchDateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -246,9 +262,11 @@
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeparmentActionInfo" EntityType="Self.DeparmentActionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KeyWordsRank" EntityType="Self.KeyWordsRank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="R_UserInfo_ActionInfo" EntityType="Self.R_UserInfo_ActionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleInfo" EntityType="Self.RoleInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleInfoActionInfo" EntityType="Self.RoleInfoActionInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SearchDetials" EntityType="Self.SearchDetials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfoDepartment" EntityType="Self.UserInfoDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfoRoleInfo" EntityType="Self.UserInfoRoleInfo" Schema="dbo" store:Type="Tables" />
@@ -297,29 +315,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ActionInfo">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DelFlag" Type="Int16" Nullable="false" />
-          <Property Name="ModifiedOn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HttpMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ActionMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ActionInfoName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Sort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ActionTypeEnum" Type="Int16" Nullable="false" />
-          <Property Name="MenuIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IconWidth" Type="Int32" Nullable="false" />
-          <Property Name="IconHeight" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="R_UserInfo_ActionInfo" Relationship="Self.FK_R_UserInfo_ActionInfo_ActionInfo1" FromRole="ActionInfo" ToRole="R_UserInfo_ActionInfo" />
-          <NavigationProperty Name="Department" Relationship="OAModel.DeparmentActionInfo" FromRole="ActionInfo" ToRole="Department" />
-          <NavigationProperty Name="RoleInfo" Relationship="OAModel.RoleInfoActionInfo" FromRole="ActionInfo" ToRole="RoleInfo" />
-        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="ID" />
@@ -330,8 +325,8 @@
           <Property Name="ThreePath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Level" Type="Int32" Nullable="false" />
           <Property Name="IsLeaf" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ActionInfo" Relationship="OAModel.DeparmentActionInfo" FromRole="Department" ToRole="ActionInfo" />
           <NavigationProperty Name="UserInfo" Relationship="OAModel.UserInfoDepartment" FromRole="Department" ToRole="UserInfo" />
+          <NavigationProperty Name="ActionInfo" Relationship="OAModel.DeparmentActionInfo" FromRole="Department" ToRole="ActionInfo" />
         </EntityType>
         <EntityType Name="R_UserInfo_ActionInfo">
           <Key>
@@ -341,8 +336,8 @@
           <Property Name="UserInfoID" Type="Int32" Nullable="false" />
           <Property Name="ActionInfoID" Type="Int32" Nullable="false" />
           <Property Name="IsPass" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ActionInfo" Relationship="Self.FK_R_UserInfo_ActionInfo_ActionInfo1" FromRole="R_UserInfo_ActionInfo" ToRole="ActionInfo" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_R_UserInfo_ActionInfo_UserInfo" FromRole="R_UserInfo_ActionInfo" ToRole="UserInfo" />
+          <NavigationProperty Name="ActionInfo" Relationship="OAModel.FK_R_UserInfo_ActionInfo_ActionInfo1" FromRole="R_UserInfo_ActionInfo" ToRole="ActionInfo" />
         </EntityType>
         <EntityType Name="RoleInfo">
           <Key>
@@ -355,8 +350,8 @@
           <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Sort" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ActionInfo" Relationship="OAModel.RoleInfoActionInfo" FromRole="RoleInfo" ToRole="ActionInfo" />
           <NavigationProperty Name="UserInfo" Relationship="OAModel.UserInfoRoleInfo" FromRole="RoleInfo" ToRole="UserInfo" />
+          <NavigationProperty Name="ActionInfo" Relationship="OAModel.RoleInfoActionInfo" FromRole="RoleInfo" ToRole="ActionInfo" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -374,18 +369,6 @@
           <NavigationProperty Name="Department" Relationship="OAModel.UserInfoDepartment" FromRole="UserInfo" ToRole="Department" />
           <NavigationProperty Name="RoleInfo" Relationship="OAModel.UserInfoRoleInfo" FromRole="UserInfo" ToRole="RoleInfo" />
         </EntityType>
-        <Association Name="FK_R_UserInfo_ActionInfo_ActionInfo1">
-          <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
-          <End Role="R_UserInfo_ActionInfo" Type="Self.R_UserInfo_ActionInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ActionInfo">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="R_UserInfo_ActionInfo">
-              <PropertyRef Name="ActionInfoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_R_UserInfo_ActionInfo_UserInfo">
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
           <End Role="R_UserInfo_ActionInfo" Type="Self.R_UserInfo_ActionInfo" Multiplicity="*" />
@@ -399,26 +382,13 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HLXOAEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ActionInfo" EntityType="Self.ActionInfo" />
           <EntitySet Name="Department" EntityType="Self.Department" />
           <EntitySet Name="R_UserInfo_ActionInfo" EntityType="Self.R_UserInfo_ActionInfo" />
           <EntitySet Name="RoleInfo" EntityType="Self.RoleInfo" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
-          <AssociationSet Name="FK_R_UserInfo_ActionInfo_ActionInfo1" Association="Self.FK_R_UserInfo_ActionInfo_ActionInfo1">
-            <End Role="ActionInfo" EntitySet="ActionInfo" />
-            <End Role="R_UserInfo_ActionInfo" EntitySet="R_UserInfo_ActionInfo" />
-          </AssociationSet>
           <AssociationSet Name="FK_R_UserInfo_ActionInfo_UserInfo" Association="Self.FK_R_UserInfo_ActionInfo_UserInfo">
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="R_UserInfo_ActionInfo" EntitySet="R_UserInfo_ActionInfo" />
-          </AssociationSet>
-          <AssociationSet Name="DeparmentActionInfo" Association="OAModel.DeparmentActionInfo">
-            <End Role="ActionInfo" EntitySet="ActionInfo" />
-            <End Role="Department" EntitySet="Department" />
-          </AssociationSet>
-          <AssociationSet Name="RoleInfoActionInfo" Association="OAModel.RoleInfoActionInfo">
-            <End Role="ActionInfo" EntitySet="ActionInfo" />
-            <End Role="RoleInfo" EntitySet="RoleInfo" />
           </AssociationSet>
           <AssociationSet Name="UserInfoDepartment" Association="OAModel.UserInfoDepartment">
             <End Role="Department" EntitySet="Department" />
@@ -429,15 +399,22 @@
             <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
           <EntitySet Name="Books" EntityType="OAModel.Books" />
+          <EntitySet Name="SearchDetials" EntityType="OAModel.SearchDetials" />
+          <EntitySet Name="ActionInfo" EntityType="OAModel.ActionInfo" />
+          <AssociationSet Name="FK_R_UserInfo_ActionInfo_ActionInfo1" Association="OAModel.FK_R_UserInfo_ActionInfo_ActionInfo1">
+            <End Role="ActionInfo" EntitySet="ActionInfo" />
+            <End Role="R_UserInfo_ActionInfo" EntitySet="R_UserInfo_ActionInfo" />
+          </AssociationSet>
+          <AssociationSet Name="DeparmentActionInfo" Association="OAModel.DeparmentActionInfo">
+            <End Role="ActionInfo" EntitySet="ActionInfo" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="RoleInfoActionInfo" Association="OAModel.RoleInfoActionInfo">
+            <End Role="ActionInfo" EntitySet="ActionInfo" />
+            <End Role="RoleInfo" EntitySet="RoleInfo" />
+          </AssociationSet>
+          <EntitySet Name="KeyWordsRank" EntityType="OAModel.KeyWordsRank" />
         </EntityContainer>
-        <Association Name="DeparmentActionInfo">
-          <End Type="OAModel.ActionInfo" Role="ActionInfo" Multiplicity="*" />
-          <End Type="OAModel.Department" Role="Department" Multiplicity="*" />
-        </Association>
-        <Association Name="RoleInfoActionInfo">
-          <End Type="OAModel.ActionInfo" Role="ActionInfo" Multiplicity="*" />
-          <End Type="OAModel.RoleInfo" Role="RoleInfo" Multiplicity="*" />
-        </Association>
         <Association Name="UserInfoDepartment">
           <End Type="OAModel.Department" Role="Department" Multiplicity="*" />
           <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="*" />
@@ -465,33 +442,71 @@
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="Clicks" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="SearchDetials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="KeyWords" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SearchDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ActionInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="ModifiedOn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HttpMethod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionInfoName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionTypeEnum" Type="Int16" Nullable="false" />
+          <Property Name="MenuIcon" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IconWidth" Type="Int32" Nullable="false" />
+          <Property Name="IconHeight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="R_UserInfo_ActionInfo" Relationship="OAModel.FK_R_UserInfo_ActionInfo_ActionInfo1" FromRole="ActionInfo" ToRole="R_UserInfo_ActionInfo" />
+          <NavigationProperty Name="Department" Relationship="OAModel.DeparmentActionInfo" FromRole="ActionInfo" ToRole="Department" />
+          <NavigationProperty Name="RoleInfo" Relationship="OAModel.RoleInfoActionInfo" FromRole="ActionInfo" ToRole="RoleInfo" />
+        </EntityType>
+        <Association Name="FK_R_UserInfo_ActionInfo_ActionInfo1">
+          <End Type="OAModel.ActionInfo" Role="ActionInfo" Multiplicity="1" />
+          <End Type="OAModel.R_UserInfo_ActionInfo" Role="R_UserInfo_ActionInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="R_UserInfo_ActionInfo">
+              <PropertyRef Name="ActionInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DeparmentActionInfo">
+          <End Type="OAModel.ActionInfo" Role="ActionInfo" Multiplicity="*" />
+          <End Type="OAModel.Department" Role="Department" Multiplicity="*" />
+        </Association>
+        <Association Name="RoleInfoActionInfo">
+          <End Type="OAModel.ActionInfo" Role="ActionInfo" Multiplicity="*" />
+          <End Type="OAModel.RoleInfo" Role="RoleInfo" Multiplicity="*" />
+        </Association>
+        <EntityType Name="KeyWordsRank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="KeyWords" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SearchCount" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OAModelStoreContainer" CdmEntityContainer="HLXOAEntities2">
-          <EntitySetMapping Name="ActionInfo">
-            <EntityTypeMapping TypeName="OAModel.ActionInfo">
-              <MappingFragment StoreEntitySet="ActionInfo">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
-                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="HttpMethod" ColumnName="HttpMethod" />
-                <ScalarProperty Name="ActionMethod" ColumnName="ActionMethod" />
-                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
-                <ScalarProperty Name="ActionInfoName" ColumnName="ActionInfoName" />
-                <ScalarProperty Name="Sort" ColumnName="Sort" />
-                <ScalarProperty Name="ActionTypeEnum" ColumnName="ActionTypeEnum" />
-                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
-                <ScalarProperty Name="IconWidth" ColumnName="IconWidth" />
-                <ScalarProperty Name="IconHeight" ColumnName="IconHeight" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Department">
             <EntityTypeMapping TypeName="OAModel.Department">
               <MappingFragment StoreEntitySet="Department">
@@ -541,22 +556,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DeparmentActionInfo" TypeName="OAModel.DeparmentActionInfo" StoreEntitySet="DeparmentActionInfo">
-            <EndProperty Name="Department">
-              <ScalarProperty Name="ID" ColumnName="Department_ID" />
-            </EndProperty>
-            <EndProperty Name="ActionInfo">
-              <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="RoleInfoActionInfo" TypeName="OAModel.RoleInfoActionInfo" StoreEntitySet="RoleInfoActionInfo">
-            <EndProperty Name="RoleInfo">
-              <ScalarProperty Name="ID" ColumnName="RoleIinfo_ID" />
-            </EndProperty>
-            <EndProperty Name="ActionInfo">
-              <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="UserInfoDepartment" TypeName="OAModel.UserInfoDepartment" StoreEntitySet="UserInfoDepartment">
             <EndProperty Name="UserInfo">
               <ScalarProperty Name="ID" ColumnName="UserInfo_ID" />
@@ -589,6 +588,61 @@
                 <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
                 <ScalarProperty Name="Author" ColumnName="Author" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SearchDetials">
+            <EntityTypeMapping TypeName="OAModel.SearchDetials">
+              <MappingFragment StoreEntitySet="SearchDetials">
+                <ScalarProperty Name="SearchDateTime" ColumnName="SearchDateTime" />
+                <ScalarProperty Name="KeyWords" ColumnName="KeyWords" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionInfo">
+            <EntityTypeMapping TypeName="OAModel.ActionInfo">
+              <MappingFragment StoreEntitySet="ActionInfo">
+                <ScalarProperty Name="IconHeight" ColumnName="IconHeight" />
+                <ScalarProperty Name="IconWidth" ColumnName="IconWidth" />
+                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+                <ScalarProperty Name="ActionTypeEnum" ColumnName="ActionTypeEnum" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="ActionInfoName" ColumnName="ActionInfoName" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="ActionMethod" ColumnName="ActionMethod" />
+                <ScalarProperty Name="HttpMethod" ColumnName="HttpMethod" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DeparmentActionInfo" TypeName="OAModel.DeparmentActionInfo" StoreEntitySet="DeparmentActionInfo">
+            <EndProperty Name="Department">
+              <ScalarProperty Name="ID" ColumnName="Department_ID" />
+            </EndProperty>
+            <EndProperty Name="ActionInfo">
+              <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RoleInfoActionInfo" TypeName="OAModel.RoleInfoActionInfo" StoreEntitySet="RoleInfoActionInfo">
+            <EndProperty Name="RoleInfo">
+              <ScalarProperty Name="ID" ColumnName="RoleIinfo_ID" />
+            </EndProperty>
+            <EndProperty Name="ActionInfo">
+              <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="KeyWordsRank">
+            <EntityTypeMapping TypeName="OAModel.KeyWordsRank">
+              <MappingFragment StoreEntitySet="KeyWordsRank">
+                <ScalarProperty Name="SearchCount" ColumnName="SearchCount" />
+                <ScalarProperty Name="KeyWords" ColumnName="KeyWords" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

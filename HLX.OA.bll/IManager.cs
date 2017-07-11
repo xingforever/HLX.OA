@@ -40,6 +40,16 @@ namespace HLX.OA.BLL
         }
     }   
 	
+	public partial class KeyWordsRankService :BaseService<KeyWordsRank>,IKeyWordsRankService
+    {
+    
+
+		 public override void SetCurrentDal()
+        {
+            CurrentDal = this.CurrentDBSession.KeyWordsRankDal;
+        }
+    }   
+	
 	public partial class R_UserInfo_ActionInfoService :BaseService<R_UserInfo_ActionInfo>,IR_UserInfo_ActionInfoService
     {
     
@@ -57,6 +67,16 @@ namespace HLX.OA.BLL
 		 public override void SetCurrentDal()
         {
             CurrentDal = this.CurrentDBSession.RoleInfoDal;
+        }
+    }   
+	
+	public partial class SearchDetialsService :BaseService<SearchDetials>,ISearchDetialsService
+    {
+    
+
+		 public override void SetCurrentDal()
+        {
+            CurrentDal = this.CurrentDBSession.SearchDetialsDal;
         }
     }   
 	

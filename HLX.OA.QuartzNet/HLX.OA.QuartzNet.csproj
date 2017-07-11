@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{098A3E3F-667D-43A9-A7C3-967FFBF788C1}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HLX.OA.IBLL</RootNamespace>
-    <AssemblyName>HLX.OA.IBLL</AssemblyName>
+    <ProjectGuid>{4C934695-2611-4242-9C52-2DF3F644B8EA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>HLX.OA.QuartzNet</RootNamespace>
+    <AssemblyName>HLX.OA.QuartzNet</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,7 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\lib\QuartzNet\Quartz.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,34 +52,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBaseService.cs" />
-    <Compile Include="IKeyWordsRankService.cs" />
-    <Compile Include="IManager.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IUserInfoService.cs" />
+    <Compile Include="IndexJob.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HLX.OA.IDAL\HLX.OA.IDAL.csproj">
-      <Project>{553ef7d9-056a-459c-987f-57a717e3610d}</Project>
-      <Name>HLX.OA.IDAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HLX.OA.Model\HLX.OA.Model.csproj">
-      <Project>{0eb43f15-dae7-47c4-8587-6d7d26d58678}</Project>
-      <Name>HLX.OA.Model</Name>
-    </ProjectReference>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="IManager.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IManager.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <ProjectReference Include="..\HLX.OA.bll\HLX.OA.BLL.csproj">
+      <Project>{39fee896-595a-448b-8f0b-564d7c9eda77}</Project>
+      <Name>HLX.OA.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HLX.OA.IBLL\HLX.OA.IBLL.csproj">
+      <Project>{098a3e3f-667d-43a9-a7c3-967ffbf788c1}</Project>
+      <Name>HLX.OA.IBLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

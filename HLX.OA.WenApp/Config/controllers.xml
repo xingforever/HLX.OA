@@ -23,6 +23,7 @@
   </object>
     <object  type="HLX.OA.WenApp.Controllers.SearchController, HLX.OA.WenApp" singleton="false" >
       <property name="BooksService" ref="BooksService" />
+      <property name="SearchDetialsService" ref="SearchDetialsService" />
   </object>
 
   <!--<object  type="HLX.OA.WenApp.Controllers.LoginController, HLX.OA.WenApp" singleton="false" >

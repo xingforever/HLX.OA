@@ -5,18 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6d9aa42b1b7a42b9a01514df796a2a11" Name="Diagram1">
-        <EntityTypeShape EntityType="OAModel.ActionInfo" Width="1.5" PointX="2.875" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OAModel.Department" Width="1.5" PointX="7.125" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OAModel.R_UserInfo_ActionInfo" Width="1.5" PointX="0.5" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OAModel.RoleInfo" Width="1.5" PointX="4" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAModel.RoleInfo" Width="1.5" PointX="4.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OAModel.UserInfo" Width="1.5" PointX="1.125" PointY="1.625" IsExpanded="true" />
-        <AssociationConnector Association="OAModel.FK_R_UserInfo_ActionInfo_ActionInfo1" ManuallyRouted="false" />
         <AssociationConnector Association="OAModel.FK_R_UserInfo_ActionInfo_UserInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="OAModel.DeparmentActionInfo" />
-        <AssociationConnector Association="OAModel.RoleInfoActionInfo" />
         <AssociationConnector Association="OAModel.UserInfoDepartment" />
         <AssociationConnector Association="OAModel.UserInfoRoleInfo" />
-        <EntityTypeShape EntityType="OAModel.Books" Width="1.5" PointX="6.125" PointY="8.75" />
+        <EntityTypeShape EntityType="OAModel.Books" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="OAModel.SearchDetials" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="OAModel.ActionInfo" Width="1.5" PointX="3.125" PointY="6.125" />
+        <AssociationConnector Association="OAModel.FK_R_UserInfo_ActionInfo_ActionInfo1" />
+        <AssociationConnector Association="OAModel.DeparmentActionInfo" />
+        <AssociationConnector Association="OAModel.RoleInfoActionInfo" />
+        <EntityTypeShape EntityType="OAModel.KeyWordsRank" Width="1.5" PointX="5.125" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
