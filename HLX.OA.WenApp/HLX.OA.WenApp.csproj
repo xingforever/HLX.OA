@@ -238,6 +238,7 @@
     <Content Include="Content\Images\logo.gif" />
     <Content Include="Content\Images\Program Files Folder.png" />
     <Content Include="Content\Images\Xp-G5 006.png" />
+    <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\lib\images\3DSMAX.png" />
     <Content Include="Content\lib\images\7_7.jpg" />
     <Content Include="Content\lib\images\Alien Folder.png" />
@@ -931,6 +932,8 @@
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.easyui.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />

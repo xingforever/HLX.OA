@@ -28,10 +28,22 @@ namespace HLX.OA.BLL
         /// 将统计的明细表的数据插入。
         /// </summary>
         /// <returns></returns>
-        public bool InsertKeyWordsRank()
+        public bool InsertKeyWordsRank() 
         {
-            string sql = "insert into KeyWordsRank(Id,KeyWords,SearchCount) select newid(),KeyWords,count(*)  from SearchDetails where DateDiff(day,SearchDetails.SearchDateTime,getdate())<=7 group by SearchDetails.KeyWords";
+            string sql = "insert into KeyWordsRank(Id,KeyWords,SearchCount) select newid(),KeyWords,count(*)  from SearchDetials where DateDiff(day,SearchDetials.SearchDateTime,getdate())<=7 group by SearchDetials.KeyWords";
             return this.CurrentDBSession.ExecuteSql(sql) > 0;
+        }
+
+        public List<string> GetSearchMsg(string term) {
+            string sql = "select keywords from keywordsRank where keywords like @term";
+           return  this.CurrentDBSession.ExecuteQuery<string>(sql, new System.Data.SqlClient.SqlParameter(
+                "@term", term + "%"));
+
+
+           
+
+
+
         }
     }
 }

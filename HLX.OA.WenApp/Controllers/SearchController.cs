@@ -18,6 +18,7 @@ namespace HLX.OA.WenApp.Controllers
     {
         IBLL.IBooksService BooksService { get; set; }
         IBLL.ISearchDetialsService SearchDetialsService { get; set; }
+        IBLL.IKeyWordsRankService KeyWordsRankService { get; set; }
 
         // GET: Search
         public ActionResult Index()
@@ -128,7 +129,13 @@ namespace HLX.OA.WenApp.Controllers
             //directory.Close();//不要忘了Close，否则索引结果搜不到
         }
 
-
+        public ActionResult AutoComplete()
+        {
+            //Thread.Sleep(5000);
+            string term = Request["term"];
+            List<string> list = KeyWordsRankService.GetSearchMsg(term);
+            return Json(list.ToArray(), JsonRequestBehavior.AllowGet);
+        }
 
 
 

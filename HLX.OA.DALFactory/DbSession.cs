@@ -58,5 +58,8 @@ namespace HLX.OA.DALFactory
         {
             return Db.Database.SqlQuery<T>(sql, pars).ToList();
         }
+
+
+
     }
 }

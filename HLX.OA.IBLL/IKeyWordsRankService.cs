@@ -11,5 +11,7 @@ namespace HLX.OA.IBLL
           bool InsertKeyWordsRank();
 
         bool DeleteKeyWordsRank();
+        List<string> GetSearchMsg(string term);
     }
 }
+

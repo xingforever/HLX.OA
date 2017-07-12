@@ -11,4 +11,5 @@
   <object type="HLX.OA.BLL.BooksService, HLX.OA.BLL" singleton="false" name="BooksService" >
      </object>
   <object type="HLX.OA.BLL.SearchDetialsService, HLX.OA.BLL" singleton="false" name="SearchDetialsService" ></object>
+  <object type="HLX.OA.BLL.KeyWordsRankService, HLX.OA.BLL" singleton="false" name="KeyWordsRankService" ></object>
 </objects>
